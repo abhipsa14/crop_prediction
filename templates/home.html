@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('static/images.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-blend-mode: soft-light;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 0px 8px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        h3{
+            padding: 15px;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form ul {
+            padding: 0;
+            list-style-type: none;
+            margin: 0;
+        }
+
+        form li {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            flex: 1;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #38a03c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #2d8a31;
+        }
+
+        #pred {
+            text-align: center;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        .prediction-result {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Crop Prediction System</h1>
+        <h3>Accessible system for crop prediction making it useful for framers to invest in specific set of crops.</h3>
+    </header>
+    <div class="container">
+        <h2>Predict the Best Crop for Your Field</h2>
+        <form action="{{ url_for('predict') }}" method="post">
+            <ul>
+                <li>
+                    <label for="N">Nitrogen (N):</label>
+                    <input name="N" type="number" id="n" required>
+                </li>
+                <li>
+                    <label for="P">Phosphorus (P):</label>
+                    <input name="P" type="number" id="p" required>
+                </li>
+                <li>
+                    <label for="K">Potassium (K):</label>
+                    <input name="K" type="number" id="k" required>
+                </li>
+                <li>
+                    <label for="rainfall">Rainfall (mm):</label>
+                    <input name="rainfall" type="number" id="rainfall" required>
+                </li>
+                <li>
+                    <label for="temperature">Temperature (°C):</label>
+                    <input name="temperature" type="number" id="temperature" required>
+                </li>
+                <li>
+                    <label for="humidity">Humidity (%):</label>
+                    <input name="humidity" type="number" id="humidity" required>
+                </li>
+                <li>
+                    <label for="ph">pH Value:</label>
+                    <input name="ph" type="number" id="ph" required>
+                </li>
+            </ul>
+            <button type="submit">Predict Crop</button>
+        </form>
+        <div class="prediction-result">
+            <p id="pred">Crops can be 👉 {{pred}}</p>
+        </div>
+    </div>
+</body>
+</html>
